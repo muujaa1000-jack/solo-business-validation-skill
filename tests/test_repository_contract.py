@@ -26,6 +26,8 @@ class RepositoryContractTests(unittest.TestCase):
             "SECURITY.md",
             "LICENSE",
             "VERSION",
+            ".github/workflows/ci.yml",
+            ".github/workflows/release.yml",
         }
         missing = sorted(path for path in required if not (ROOT / path).is_file())
         self.assertEqual(missing, [], f"Missing public files: {missing}")
@@ -147,6 +149,25 @@ class RepositoryContractTests(unittest.TestCase):
                     findings.append(f"{path.relative_to(ROOT)}: {label}")
 
         self.assertEqual(findings, [])
+
+    def test_workflows_pin_official_actions_and_verify_releases(self) -> None:
+        ci = read(".github/workflows/ci.yml")
+        release = read(".github/workflows/release.yml")
+        pinned_actions = (
+            "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+        )
+        for action in pinned_actions:
+            self.assertIn(action, ci)
+            self.assertIn(action, release)
+        self.assertIn(
+            "actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+            ci,
+        )
+        self.assertIn("python scripts/verify_artifacts.py", ci)
+        self.assertIn("python scripts/verify_artifacts.py", release)
+        self.assertIn("contents: write", release)
+        self.assertIn("gh release", release)
 
 
 if __name__ == "__main__":

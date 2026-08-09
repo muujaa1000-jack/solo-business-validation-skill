@@ -265,7 +265,7 @@ git commit -m "build: add reproducible skill packages"
 
 - [ ] **Step 1: Add CI workflow**
 
-Use `actions/checkout@v4` and `actions/setup-python@v5` with Python 3.10, 3.12, and 3.14. Run unit tests and `scripts/validate.py`; package and verify on Python 3.12; upload artifacts only from the packaging job.
+Use the current official `actions/checkout`, `actions/setup-python`, and `actions/upload-artifact` releases pinned to full commit SHA values, with readable version comments. Test on Python 3.10, 3.12, and 3.14. Run unit tests and `scripts/validate.py`; package and verify on Python 3.12; upload artifacts only from the packaging job.
 
 - [ ] **Step 2: Add release workflow**
 
