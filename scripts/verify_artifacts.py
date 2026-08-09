@@ -99,9 +99,14 @@ def main(argv: list[str] | None = None) -> int:
     findings: list[str] = []
     for artifact in artifacts:
         findings.extend(verify(root, artifact))
-    if len(artifacts) >= 2 and artifacts[0].read_bytes() != artifacts[1].read_bytes():
+    existing_artifacts = [artifact for artifact in artifacts if artifact.is_file()]
+    if (
+        len(existing_artifacts) >= 2
+        and existing_artifacts[0].read_bytes() != existing_artifacts[1].read_bytes()
+    ):
         findings.append("ZIP and .skill payloads are not byte-identical")
-    findings.extend(_verify_checksums(artifacts))
+    if existing_artifacts:
+        findings.extend(_verify_checksums(existing_artifacts))
 
     if findings:
         for finding in findings:

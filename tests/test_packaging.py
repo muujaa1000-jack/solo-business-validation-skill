@@ -1,4 +1,6 @@
 import hashlib
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -57,6 +59,27 @@ class PackagingTests(unittest.TestCase):
             findings = verify(ROOT, archive_path)
             self.assertTrue(any("unsafe archive path" in finding for finding in findings))
             self.assertTrue(any("archive members differ" in finding for finding in findings))
+
+    def test_cli_reports_missing_artifacts_without_a_traceback(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            temp = Path(temporary)
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts/verify_artifacts.py"),
+                    str(temp / "missing.zip"),
+                    str(temp / "missing.skill"),
+                ],
+                cwd=ROOT,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                check=False,
+            )
+
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("artifact does not exist", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
 
 
 if __name__ == "__main__":
