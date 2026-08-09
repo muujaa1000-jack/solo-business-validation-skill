@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Business Validation"
+  short_description: "Validate demand, payment, economics, and stop lines"
+  default_prompt: "Use $solo-business-validation-skill to decide whether this project deserves the next investment and design the smallest decisive experiment."
