@@ -59,6 +59,12 @@ def scan_text(label: str, text: str) -> list[str]:
     return findings
 
 
+def normalized_runtime_bytes(root: Path, relative: str) -> bytes:
+    """Return UTF-8 runtime text with platform-independent LF endings."""
+    data = (root / relative).read_bytes()
+    return data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+
+
 def parse_frontmatter(skill_text: str) -> tuple[list[str], dict[str, str]]:
     match = re.match(r"\A---\n(.*?)\n---\n", skill_text, re.DOTALL)
     if not match:

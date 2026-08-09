@@ -9,9 +9,9 @@ import zipfile
 from pathlib import Path, PurePosixPath
 
 try:
-    from scripts.validate import RUNTIME_FILES, SKILL_NAME, scan_text
+    from scripts.validate import RUNTIME_FILES, SKILL_NAME, normalized_runtime_bytes, scan_text
 except ModuleNotFoundError:  # Direct execution from scripts/.
-    from validate import RUNTIME_FILES, SKILL_NAME, scan_text
+    from validate import RUNTIME_FILES, SKILL_NAME, normalized_runtime_bytes, scan_text
 
 
 def expected_members() -> list[str]:
@@ -52,7 +52,7 @@ def verify(root: Path, artifact: Path) -> list[str]:
                 if member not in members:
                     continue
                 payload = archive.read(member)
-                source = (root / relative).read_bytes()
+                source = normalized_runtime_bytes(root, relative)
                 if hashlib.sha256(payload).digest() != hashlib.sha256(source).digest():
                     findings.append(f"{artifact.name}: content hash differs for {relative}")
                 try:

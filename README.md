@@ -67,7 +67,7 @@ The `.skill` filename convention is not required by the base Agent Skills specif
 
 ## Compatibility and verification
 
-| Target | Status in v0.1.0 |
+| Target | Status |
 |---|---|
 | Open Agent Skills directory format | Conforms to the documented `SKILL.md` structure; validated by repository contracts and the official local quick validator |
 | Codex | Uses the documented user-skill layout and optional `agents/openai.yaml`; source and release packages are locally validated |
@@ -94,7 +94,7 @@ No runtime dependencies are required. With Python 3.10 or newer:
 python -m unittest discover -s tests -p "test_*.py" -v
 python scripts/validate.py
 python scripts/package.py
-python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.0.zip dist/solo-business-validation-skill-0.1.0.skill
+python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.1.zip dist/solo-business-validation-skill-0.1.1.skill
 ```
 
 The maintenance path is deliberately short:

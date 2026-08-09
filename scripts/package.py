@@ -11,9 +11,14 @@ import zipfile
 from pathlib import Path
 
 try:
-    from scripts.validate import RUNTIME_FILES, SKILL_NAME, validate_repository
+    from scripts.validate import (
+        RUNTIME_FILES,
+        SKILL_NAME,
+        normalized_runtime_bytes,
+        validate_repository,
+    )
 except ModuleNotFoundError:  # Direct execution from scripts/.
-    from validate import RUNTIME_FILES, SKILL_NAME, validate_repository
+    from validate import RUNTIME_FILES, SKILL_NAME, normalized_runtime_bytes, validate_repository
 
 
 FIXED_ZIP_TIMESTAMP = (1980, 1, 1, 0, 0, 0)
@@ -44,7 +49,7 @@ def build(root: Path, output_dir: Path) -> tuple[Path, Path, Path]:
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for relative in sorted(RUNTIME_FILES):
             archive_name = f"{SKILL_NAME}/{Path(relative).as_posix()}"
-            archive.writestr(_zip_info(archive_name), (root / relative).read_bytes())
+            archive.writestr(_zip_info(archive_name), normalized_runtime_bytes(root, relative))
 
     shutil.copyfile(zip_path, skill_path)
     digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()

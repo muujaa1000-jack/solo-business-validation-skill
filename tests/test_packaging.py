@@ -60,6 +60,21 @@ class PackagingTests(unittest.TestCase):
             self.assertTrue(any("unsafe archive path" in finding for finding in findings))
             self.assertTrue(any("archive members differ" in finding for finding in findings))
 
+    def test_package_normalizes_runtime_text_to_lf(self) -> None:
+        from scripts.package import build
+
+        with tempfile.TemporaryDirectory() as temporary:
+            archive_path, _, _ = build(ROOT, Path(temporary))
+            with zipfile.ZipFile(archive_path) as archive:
+                for member in (
+                    "solo-business-validation-skill/LICENSE",
+                    "solo-business-validation-skill/SKILL.md",
+                    "solo-business-validation-skill/agents/openai.yaml",
+                ):
+                    payload = archive.read(member)
+                    self.assertNotIn(b"\r\n", payload, f"{member} contains CRLF")
+                    self.assertNotIn(b"\r", payload, f"{member} contains bare CR")
+
     def test_cli_reports_missing_artifacts_without_a_traceback(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temp = Path(temporary)

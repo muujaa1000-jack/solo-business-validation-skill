@@ -67,7 +67,7 @@ $HOME/.agents/skills/solo-business-validation-skill
 
 ## 兼容性与验证边界
 
-| 对象 | v0.1.0 状态 |
+| 对象 | 当前状态 |
 |---|---|
 | 开放 Agent Skills 目录格式 | 符合公开的 `SKILL.md` 结构，并通过仓库契约和官方本地快速校验 |
 | Codex | 使用官方文档中的用户级 Skill 目录和可选 `agents/openai.yaml`；源目录与发布包均做本地校验 |
@@ -94,7 +94,7 @@ Skill 本身没有运行时依赖。使用 Python 3.10 或更高版本：
 python -m unittest discover -s tests -p "test_*.py" -v
 python scripts/validate.py
 python scripts/package.py
-python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.0.zip dist/solo-business-validation-skill-0.1.0.skill
+python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.1.zip dist/solo-business-validation-skill-0.1.1.skill
 ```
 
 后续维护流程只有五步：

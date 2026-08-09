@@ -14,7 +14,7 @@ Contributions that make the Skill clearer, safer, more evidence-bound, or easier
    python -m unittest discover -s tests -p "test_*.py" -v
    python scripts/validate.py
    python scripts/package.py
-   python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.0.zip dist/solo-business-validation-skill-0.1.0.skill
+   python scripts/verify_artifacts.py dist/solo-business-validation-skill-0.1.1.zip dist/solo-business-validation-skill-0.1.1.skill
    ```
 
 6. Check that `SKILL.md` remains under 500 lines and uses only forward-slash relative paths.

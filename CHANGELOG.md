@@ -4,6 +4,13 @@ All notable changes to this project are documented here. The project follows [Se
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-08-09
+
+### Fixed
+
+- Normalize runtime text to LF so Windows and Linux produce byte-identical release artifacts.
+- Verify release payloads against normalized source text while still rejecting content changes.
+
 ## [0.1.0] - 2026-08-09
 
 ### Added
@@ -13,5 +20,6 @@ All notable changes to this project are documented here. The project follows [Se
 - Four evaluation scenarios covering payment, sunk cost, engagement, and missing evidence.
 - Contract tests, privacy checks, deterministic ZIP and `.skill` packaging, and release automation.
 
-[Unreleased]: https://github.com/muujaa1000-jack/solo-business-validation-skill/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/muujaa1000-jack/solo-business-validation-skill/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/muujaa1000-jack/solo-business-validation-skill/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/muujaa1000-jack/solo-business-validation-skill/releases/tag/v0.1.0
