@@ -173,7 +173,7 @@ Run:
 
 ```bash
 python -m unittest discover -s tests -p "test_*.py" -v
-git grep -n -I -E "(BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|gh[pousr]_[A-Za-z0-9]{20,}|C:\\Users\\|/Users/[^/]+/)"
+python scripts/validate.py
 ```
 
 Expected: all tests PASS; the privacy search returns no match.

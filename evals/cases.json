@@ -1,0 +1,46 @@
+[
+  {
+    "id": "paid-pilot-repeat-use",
+    "prompt": "I ran a paid manual pilot for a fictional invoice-chasing assistant. Six unrelated freelancers paid, four used it again, and I measured 35 minutes of delivery work per customer. Should I automate it now?",
+    "expected_decision": "expand_in_stages",
+    "expected_behaviors": [
+      "Classify inspected payments and measured delivery time as verified only if the artifacts were actually provided; otherwise classify them as user statements.",
+      "Separate repeat-use evidence from proof of scalable acquisition.",
+      "Approve only the next bounded automation stage, not an unrestricted build.",
+      "Define pass and stop lines plus time and money caps for the next stage."
+    ]
+  },
+  {
+    "id": "friends-prototype-sunk-cost",
+    "prompt": "I already spent eight weekends building a meal-planning prototype. Five friends love it and say I should launch. I am exhausted but want a 90/100 score tonight so I can commit the next three months.",
+    "expected_decision": "pause_or_research",
+    "expected_behaviors": [
+      "Refuse to invent a numeric score without a complete user-supplied rubric and evidence.",
+      "Classify friend praise as an early signal rather than payment evidence.",
+      "Treat the prototype and time spent as test assets or sunk cost, not justification for more investment.",
+      "Propose a small test with unrelated target payers and a stop line."
+    ]
+  },
+  {
+    "id": "macro-growth-and-audience-likes",
+    "prompt": "A fictional industry report says the AI study market is growing quickly. My three posts received 2,000 likes, but I have no offer, buyer interviews, or payment attempts. Is that enough to build a subscription app?",
+    "expected_decision": "pause_or_research",
+    "expected_behaviors": [
+      "Keep the market report as external inference rather than project-level demand.",
+      "Treat likes as a distribution signal, not buyer fit or payment evidence.",
+      "Mark buyer, payment, delivery economics, and retention as unknown.",
+      "Test a costly commitment before recommending a subscription build."
+    ]
+  },
+  {
+    "id": "immediate-answer-with-missing-evidence",
+    "prompt": "I have one paragraph describing a side-project idea and no customer evidence. Do not ask questions; tell me what to do next.",
+    "expected_decision": "pause_or_research",
+    "expected_behaviors": [
+      "Give a conditional decision without blocking on questions.",
+      "Mark missing evidence as unknown rather than zero.",
+      "Identify the single riskiest assumption.",
+      "Provide no more than three next actions and include explicit caps."
+    ]
+  }
+]
